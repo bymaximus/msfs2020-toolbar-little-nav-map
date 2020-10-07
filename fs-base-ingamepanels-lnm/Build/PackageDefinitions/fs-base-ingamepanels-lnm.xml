@@ -1,0 +1,22 @@
+<AssetPackage Name="fs-base-ingamepanels-lnm" Version="0.1.0">
+	<ItemSettings>
+		<ContentType>SPB</ContentType>
+		<Title>fs-base-ingamepanels-lnm</Title>
+		<Manufacturer/>
+		<Creator>Maximus</Creator>
+	</ItemSettings>
+	<Flags>
+		<VisibleInStore>false</VisibleInStore>
+		<CanBeReferenced>false</CanBeReferenced>
+	</Flags>
+	<AssetGroups>
+		<AssetGroup Name="fs-base-ingamepanels-lnm">
+			<Type>SPB</Type>
+			<Flags>
+				<FSXCompatibility>false</FSXCompatibility>
+			</Flags>
+			<AssetDir>PackageSources\</AssetDir>
+			<OutputDir>Build\</OutputDir>
+		</AssetGroup>
+	</AssetGroups>
+</AssetPackage>

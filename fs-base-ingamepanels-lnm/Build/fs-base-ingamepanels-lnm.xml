@@ -1,0 +1,7 @@
+<Project Version="2" Name="fs-base-ingamepanels-lnm" FolderName="Packages">
+	<OutputDirectory>.</OutputDirectory>
+	<TemporaryOutputDirectory>_PackageInt</TemporaryOutputDirectory>
+	<Packages>
+		<Package>PackageDefinitions\fs-base-ingamepanels-lnm.xml</Package>
+	</Packages>
+</Project>
