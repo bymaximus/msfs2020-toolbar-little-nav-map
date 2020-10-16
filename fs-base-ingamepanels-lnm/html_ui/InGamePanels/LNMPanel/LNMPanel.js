@@ -5,8 +5,19 @@ class IngamePanelLNMPanel extends TemplateElement {
         this.started = false;
         this.busy = false;
         this.front = true;
-        this.url = "http://localhost:8965";
+        this.url = "";
+        this.zoom = 4;
         this.debugEnabled = false;
+        this.onStorageReady = () => {
+            if (this.debugEnabled) {
+                var self = this;
+                setTimeout(() => {
+                    self.isDebugEnabled();
+                }, 1000);
+            } else {
+                this.initialize();
+            }
+        };
     }
     isDebugEnabled() {
         var self = this;
@@ -80,14 +91,7 @@ class IngamePanelLNMPanel extends TemplateElement {
     }
     connectedCallback() {
         super.connectedCallback();
-        if (this.debugEnabled) {
-            var self = this;
-            setTimeout(() => {
-                self.isDebugEnabled();
-            }, 1000);
-        } else {
-            this.initialize();
-        }
+        document.addEventListener("dataStorageReady", this.onStorageReady);
     }
     initialize() {
         if (this.started) {
@@ -99,12 +103,21 @@ class IngamePanelLNMPanel extends TemplateElement {
         this.m_MainDisplay.classList.add("hidden");
 
         this.m_Footer = document.querySelector("#Footer");
-        this.m_Footer.classList.add("hidden");
+        //this.m_Footer.classList.add("hidden");
 
+        this.url = GetStoredData("INGAME_PANEL_LNMPANEL_URL");
+        if (! this.url) {
+            this.url = "http://localhost:8965";
+        }
+
+        this.urlElement = document.querySelector("#LNMPanelAddress");
+        this.saveElement = document.querySelector("#LNMPanelSave");
         this.errorElement = document.getElementById("LNMPanelImageError");
         this.imageElementFront = document.getElementById("LNMPanelImageFront");
         this.imageElementBack = document.getElementById("LNMPanelImageBack");
+        this.imageElementZoom = document.getElementById("LNMPanelImageZoom");
         this.ingameUi = this.querySelector('ingame-ui');
+
 
         if (this.imageElementFront && this.imageElementBack) {
             this.imageElementFront.addEventListener("error", () => {
@@ -119,6 +132,26 @@ class IngamePanelLNMPanel extends TemplateElement {
             this.imageElementBack.addEventListener("load", () => {
                 self.onImageLoad();
             });
+            if (this.imageElementZoom) {
+                var panzoom = Panzoom(this.imageElementZoom, {
+                    disablePan: true,
+                    maxScale: 4,
+                    minScale: 0.01,
+                    step: -1
+                });
+                var panzoomParent = this.imageElementZoom.parentElement;
+                panzoomParent.addEventListener('wheel', panzoom.zoomWithWheel);
+                this.imageElementZoom.addEventListener('panzoomchange', (event) => {
+                    if (event.detail.scale > 4) {
+                        self.zoom = 4;
+                    } else if (event.detail.scale < 0) {
+                        self.zoom = 0;
+                    } else {
+                        self.zoom = event.detail.scale.toFixed(2);
+                    }
+                });
+
+            }
         }
 
         if (this.ingameUi) {
@@ -130,9 +163,27 @@ class IngamePanelLNMPanel extends TemplateElement {
             });
         }
 
+        if (this.saveElement) {
+            this.saveElement.addEventListener("click", (e) => {
+                if (self.urlElement &&
+                    self.urlElement.value
+                ) {
+                    self.url = self.urlElement.value;
+                    SetStoredData("INGAME_PANEL_LNMPANEL_URL", self.url);
+                    setTimeout(function() {
+                        self.updateImage();
+                    }, 250);
+                }
+            });
+        }
+        if (this.urlElement) {
+            this.urlElement.value = this.url;
+        }
+
         this.started = true;
     }
     disconnectedCallback() {
+        document.removeEventListener("dataStorageReady", this.onStorageReady);
         super.disconnectedCallback();
     }
     onImageError() {
@@ -188,18 +239,25 @@ class IngamePanelLNMPanel extends TemplateElement {
         }, 250);
     }
     updateImage() {
+        if (! this.url) {
+            var self = this;
+            setTimeout(function() {
+                self.updateImage();
+            }, 250);
+            return;
+        }
         if (this.front) {
             if (this.imageElementFront) {
                 if (! this.busy) {
                     this.busy = true;
-                    this.imageElementFront.src = this.url + "/mapimage?format=jpg&quality=80&width=" + Math.max(this.imageElementFront.width, 160) + "&height=" + Math.max(this.imageElementFront.height, 90) +"&session&mapcmd=user&distance=5&cmd=" + Math.random();
+                    this.imageElementFront.src = this.url + "/mapimage?format=jpg&quality=80&width=" + Math.max(this.imageElementFront.width, 160) + "&height=" + Math.max(this.imageElementFront.height, 90) +"&session&mapcmd=user&distance="+this.zoom.toString()+"&cmd=" + Math.random();
                 }
             }
         } else {
             if (this.imageElementBack) {
                 if (! this.busy) {
                     this.busy = true;
-                    this.imageElementBack.src = this.url + "/mapimage?format=jpg&quality=80&width=" + Math.max(this.imageElementBack.width, 160) + "&height=" + Math.max(this.imageElementBack.height, 90) +"&session&mapcmd=user&distance=5&cmd=" + Math.random();
+                    this.imageElementBack.src = this.url + "/mapimage?format=jpg&quality=80&width=" + Math.max(this.imageElementBack.width, 160) + "&height=" + Math.max(this.imageElementBack.height, 90) +"&session&mapcmd=user&distance="+this.zoom.toString()+"&cmd=" + Math.random();
                 }
             }
         }

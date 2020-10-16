@@ -18,6 +18,7 @@
     <link rel="import" href="/templates/ingameUiHeader/ingameUiHeader.html" />
     <link rel="import" href="/templates/NewListButton/NewListButton.html" />
 
+    <script type="text/javascript" src="panzoom.js"></script>
     <script type="text/javascript" src="LNMPanel.js"></script>
 </head>
 
@@ -25,6 +26,7 @@
     <ingamepanel-lnm>
         <ingame-ui id="LNMPanel" panel-id="PANEL_LNM_PANEL" title="" class="ingameUiFrame panelInvisible" content-fit="true" min-width="160" min-height="90">
             <div id="LNMPanelWrap">
+                <div id="LNMPanelImageZoom"></div>
                 <div id="LNMPanelImageError"></div>
                 <img id="LNMPanelImageFront" />
                 <img id="LNMPanelImageBack" />
@@ -33,7 +35,8 @@
                 header
             </section>
             <section id="Footer">
-                footer
+                <input type="text" id="LNMPanelAddress" value=""/>
+                <new-push-button class="small" id="LNMPanelSave" title="Save"></new-push-button>
             </section>
         </ingame-ui>
     </ingamepanel-lnm>

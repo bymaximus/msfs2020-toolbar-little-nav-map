@@ -32,6 +32,17 @@ ingame-ui#LNMPanel #LNMPanelWrap #LNMPanelImageError.show {
   bottom: 0px;
   background: url(data:image/gif;base64,R0lGODlhGAAYAPIAAMrs8srt8srs88rt88vt8wAAAAAAAAAAACH5BAkKAAUAIf8LTkVUU0NBUEUyLjADAQAAACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAYABgAAANQWLpcRC3KFUSAMysSrmZd8zSVVAnYxKHRGWiu+X7eZ994/o26A3E13OpSmeGKv1SO12s6nw5jxmISUDMxkUUZIVili+uCqQjuOuBlEUqWJAAAIfkECQoABgAh/wtJbWFnZU1hZ2ljaw1nYW1tYT0wLjQ1NDU1ACwAAAAAGAAYAILK7PLK7fLK7PPK7fPL7fP///8AAAAAAAADUGi6bEQtyhVEgDMrEq5mXfM0RSFVAjaVZYQGGmu68Nd+eK7v38g7EI5nx7EUa7qKx8dj/p7QKAdnOQmqmVeEYNRwsQ3wRqUY4oTI3zEK/CQAACH5BAkKAAYAIf8LSW1hZ2VNYWdpY2sNZ2FtbWE9MC40NTQ1NQAsAAAAABgAGACCyuzyyu3yyuzzyu3zy+3z////AAAAAAAAA1BoumxELcoVRIAzKxKuZl3zNEUhVQI2lWWEBhpruvDXfniu79/IGy2OZyfjWHgyh4o4+zmfUEdNc3QJqpNXhGBZbq9TBnbjHeKEYZ4xrfZGEgAh+QQJCgAGACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAYABgAgsrs8srt8srs88rt88vt8////wAAAAAAAANQaLpsRC3KFUSAMysSrmZd8zRFIVUCNpVlhAYaa7rw1354ru/fyBstjmcn41h4MoeKOPs5n1BHLdYECY6ZpMiyjGgb2IVvccMJpz8jOt2NJAAAIfkECQoABgAh/wtJbWFnZU1hZ2ljaw1nYW1tYT0wLjQ1NDU1ACwAAAAAGAAYAILK7PLK7fLK7PPK7fPL7fP///8AAAAAAAADTmi6bEQtyhVEgDMrEq5mXfM0RSFVAjaVZYQGGmu68Nd+eK7v38gbLY5nJ+NYeDKHijj7OZ9QRy3WBAmOmaTIsoxoG9jFTVyljn9f51mSAAAh+QQJCgAGACH/C0ltYWdlTWFnaWNrDWdhbW1hPTAuNDU0NTUALAAAAAAYABgAgsrs8srt8srs88rt88vt8////wAAAAAAAANKaLpsRC3KFUSAMysSrmZd8zRFIVUCNpVlhAYaa7rw1354ru/fyBstjmcn41h4MoeKOPs5n1BgM3MjsWJXa1WSjGylVl3XOSZPJQkAIfkECQoABgAh/wtJbWFnZU1hZ2ljaw1nYW1tYT0wLjQ1NDU1ACwAAAAAGAAYAILK7PLK7fLK7PPK7fPL7fP///8AAAAAAAADR2i6bEQtyhVEgDMrEq5mXfM0RSFVAjaVZYQGGmu68Nd+eK7v9sy3sp+MJQT6djeecskkHVdPRTAzZVQl10VS+tzGiMys8JMAACH5BAkKAAMAIf8LSW1hZ2VNYWdpY2sNZ2FtbWE9MC40NTQ1NQAsAAAAABgAGACByuzyyu3z////AAAAAkCcjxOR7RfAehQuVo8QaaLtbCAlcklZoc2YmtkLx3I7G6AalziMsrJfCwqFwJDrI2oVd6tk83QcFB/Mn5MYbRQAACH5BAkKAAEAIf8LSW1hZ2VNYWdpY2sNZ2FtbWE9MC40NTQ1NQAsAAAAABgAGACA////AAAAAjuMjwGQ7bfWmzBSJDHTLu7nNeE0Jhl1XurKtuTXSuXqzWqYsrnL976xE8EqQeJQYXkFc8wjKNmzuYqHAgA7) 50% 50% no-repeat;
 }
+ingame-ui#LNMPanel #LNMPanelWrap #LNMPanelImageZoom {
+  position: absolute !important;
+  top: 0px !important;
+  left: 0px !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  display: block !important;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
 ingame-ui#LNMPanel #LNMPanelWrap #LNMPanelImageFront {
   position: absolute !important;
   top: 0px !important;
@@ -62,6 +73,41 @@ ingame-ui#LNMPanel #LNMPanelWrap #LNMPanelImageBack.hidden {
 }
 ingame-ui#LNMPanel #MainDisplay.hidden {
   display: none;
+}
+ingame-ui#LNMPanel #Footer {
+  /*position: absolute !important;
+  left: 0px !important;
+  right: 0px !important;
+  bottom: 0px !important;
+  height: 30px;*/
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  font-size: var(--fontSizePragraph);
+  text-transform: uppercase;
+  background-color: rgba(0, 0, 0, 0.75);
+  width: 100%;
+  min-height: 40px;
+  height: 40px;
+  max-height: 40px;
+}
+ingame-ui#LNMPanel #Footer input[type="text"] {
+  /*background-color: var(--color-darker-gray);*/
+  margin-top: 7px;
+  margin-left: 13px;
+  background-color: white;
+  border: 1px solid white;
+  height: calc(100% - 12px);
+  width: 200px;
+  border-radius: 1px;
+}
+ingame-ui#LNMPanel #Footer #LNMPanelSave {
+  padding: 0px !important;
+  height: 10px !important;
+  max-height: 10px !important;
+  margin-top: 6px;
+  margin-left: 13px;
+  width: 60px;
 }
 ingame-ui#LNMPanel #Footer.hidden {
   display: none;
