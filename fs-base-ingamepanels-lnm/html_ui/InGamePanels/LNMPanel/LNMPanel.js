@@ -103,7 +103,7 @@ class IngamePanelLNMPanel extends TemplateElement {
         this.m_MainDisplay.classList.add("hidden");
 
         this.m_Footer = document.querySelector("#Footer");
-        //this.m_Footer.classList.add("hidden");
+        this.m_Footer.classList.add("hidden");
 
         this.url = GetStoredData("INGAME_PANEL_LNMPANEL_URL");
         if (! this.url) {
@@ -139,7 +139,7 @@ class IngamePanelLNMPanel extends TemplateElement {
                     minScale: 0.01,
                     step: -1
                 });
-                var panzoomParent = this.imageElementZoom.parentElement;
+                const panzoomParent = this.imageElementZoom.parentElement;
                 panzoomParent.addEventListener('wheel', panzoom.zoomWithWheel);
                 this.imageElementZoom.addEventListener('panzoomchange', (event) => {
                     if (event.detail.scale > 4) {
@@ -161,6 +161,11 @@ class IngamePanelLNMPanel extends TemplateElement {
             this.ingameUi.addEventListener("onResizeElement", () => {
                 self.updateImage();
             });
+            this.ingameUi.addEventListener("dblclick", () => {
+                if (self.m_Footer) {
+                    self.m_Footer.classList.remove("hidden");
+                }
+            });
         }
 
         if (this.saveElement) {
@@ -173,6 +178,9 @@ class IngamePanelLNMPanel extends TemplateElement {
                     setTimeout(function() {
                         self.updateImage();
                     }, 250);
+                    if (self.m_Footer) {
+                        self.m_Footer.classList.add("hidden");
+                    }
                 }
             });
         }
