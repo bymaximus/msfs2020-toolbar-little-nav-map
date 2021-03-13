@@ -1,0 +1,1 @@
+copy /Y "fs-base-ingamepanels-lnm\Build\Packages\fs-base-ingamepanels-lnm\Build\fs-base-ingamepanels-lnm.spb" "fs-base-ingamepanels-lnm\InGamePanels" && rmdir /s /q "fs-base-ingamepanels-lnm\Build\Packages" && rmdir /s /q "fs-base-ingamepanels-lnm\Build\_PackageInt"
