@@ -1,0 +1,1 @@
+"%MSFS_SDK%\Tools\bin\fspackagetool.exe" "fs-base-ingamepanels-lnm\Build\fs-base-ingamepanels-lnm.xml" -nomirroring
